@@ -116,3 +116,24 @@ h1 {
 .reset-btn:active {
     transform: translateY(0);
 }
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1000;
+    animation: confetti-fall linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) translateX(var(--drift)) rotate(720deg);
+        opacity: 0;
+    }
+}
