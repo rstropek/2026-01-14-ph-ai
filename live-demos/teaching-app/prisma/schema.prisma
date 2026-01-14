@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Klasse {
+  id          Int      @id @default(autoincrement())
+  schuljahr   String   // z.B. "2025/26"
+  bezeichnung String   // z.B. "1AHIF"
+  fach        String   // z.B. "Mathematik"
+  schueler    Schueler[]
+  tests       Test[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Schueler {
+  id             Int              @id @default(autoincrement())
+  vorname        String
+  nachname       String
+  kontaktEmail   String
+  anmerkung      String?
+  klasseId       Int
+  klasse         Klasse           @relation(fields: [klasseId], references: [id], onDelete: Cascade)
+  testergebnisse Testergebnis[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model Test {
+  id             Int              @id @default(autoincrement())
+  bezeichnung    String           // z.B. "Mathematik Test 1"
+  datum          DateTime
+  klasseId       Int
+  klasse         Klasse           @relation(fields: [klasseId], references: [id], onDelete: Cascade)
+  testergebnisse Testergebnis[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model Testergebnis {
+  id          Int      @id @default(autoincrement())
+  prozentwert Float    // z.B. 85.5
+  anmerkung   String?
+  testId      Int
+  test        Test     @relation(fields: [testId], references: [id], onDelete: Cascade)
+  schuelerId  Int
+  schueler    Schueler @relation(fields: [schuelerId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([testId, schuelerId])
+}

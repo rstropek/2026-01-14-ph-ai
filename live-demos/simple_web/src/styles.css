@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    background: #1a1a1a;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+h1 {
+    color: #00ff88;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.status {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #e0e0e0;
+    font-weight: bold;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 10px;
+    margin: 0 auto 2rem;
+    width: fit-content;
+}
+
+.cell {
+    background: #2a2a2a;
+    border: 3px solid #00ff88;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 3rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.cell:hover:not(.taken) {
+    background: #333;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+}
+
+.cell.taken {
+    cursor: not-allowed;
+}
+
+.cell.x {
+    color: #00ff88;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.cell.o {
+    color: #ff0088;
+    text-shadow: 0 0 10px rgba(255, 0, 136, 0.5);
+}
+
+.cell.winner {
+    background: #444;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+    animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.reset-btn {
+    background: transparent;
+    color: #00ff88;
+    border: 2px solid #00ff88;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+}
+
+.reset-btn:hover {
+    background: #00ff88;
+    color: #0a0a0a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.6);
+}
+
+.reset-btn:active {
+    transform: translateY(0);
+}
