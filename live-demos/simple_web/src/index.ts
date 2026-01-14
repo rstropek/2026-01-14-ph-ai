@@ -61,11 +61,9 @@ class TicTacToe {
 
         for (const condition of this.winningConditions) {
             const [a, b, c] = condition;
-            if (a === undefined || b === undefined || c === undefined) continue;
-            
-            const cellA = this.board[a];
-            const cellB = this.board[b];
-            const cellC = this.board[c];
+            const cellA = this.board[a!];
+            const cellB = this.board[b!];
+            const cellC = this.board[c!];
 
             if (cellA === null || cellB === null || cellC === null) {
                 continue;
@@ -119,10 +117,7 @@ class TicTacToe {
             confetti.style.top = '-10px';
             
             // Random color
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            if (randomColor) {
-                confetti.style.backgroundColor = randomColor;
-            }
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]!;
             
             // Random size
             const size = Math.random() * 10 + 5;
