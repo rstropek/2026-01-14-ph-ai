@@ -61,6 +61,8 @@ class TicTacToe {
 
         for (const condition of this.winningConditions) {
             const [a, b, c] = condition;
+            if (a === undefined || b === undefined || c === undefined) continue;
+            
             const cellA = this.board[a];
             const cellB = this.board[b];
             const cellC = this.board[c];
@@ -95,8 +97,55 @@ class TicTacToe {
 
     private highlightWinningCells(combination: number[]): void {
         combination.forEach(index => {
-            this.cells[index].classList.add('winner');
+            const cell = this.cells[index];
+            if (cell) {
+                cell.classList.add('winner');
+            }
         });
+        this.launchConfetti();
+    }
+
+    private launchConfetti(): void {
+        const colors = ['#00ff88', '#ff0088', '#ffcc00', '#00ccff', '#ff6600', '#cc00ff'];
+        const confettiCount = 150;
+
+        for (let i = 0; i < confettiCount; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            
+            // Random starting position across the top
+            const startX = Math.random() * window.innerWidth;
+            confetti.style.left = `${startX}px`;
+            confetti.style.top = '-10px';
+            
+            // Random color
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            if (randomColor) {
+                confetti.style.backgroundColor = randomColor;
+            }
+            
+            // Random size
+            const size = Math.random() * 10 + 5;
+            confetti.style.width = `${size}px`;
+            confetti.style.height = `${size}px`;
+            
+            // Random animation duration and delay
+            const duration = Math.random() * 3 + 2;
+            const delay = Math.random() * 0.5;
+            confetti.style.animationDuration = `${duration}s`;
+            confetti.style.animationDelay = `${delay}s`;
+            
+            // Random horizontal drift
+            const drift = (Math.random() - 0.5) * 200;
+            confetti.style.setProperty('--drift', `${drift}px`);
+            
+            document.body.appendChild(confetti);
+            
+            // Remove confetti after animation
+            setTimeout(() => {
+                confetti.remove();
+            }, (duration + delay) * 1000);
+        }
     }
 
     private switchPlayer(): void {
