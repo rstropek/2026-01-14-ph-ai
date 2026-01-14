@@ -1,0 +1,1 @@
+Ich bin Lehrer und ich möchte eine Web App für mich bauen, in der ich meine Klassen, Schüler:innen, ihre Prüfungsergebnisse, etc. verwalten kann. Ich bin nicht sehr gut im Programmieren, kann aber ein wenig TypeScript. Die Daten will ich in einer lokalen DB speichern, ohne großen Aufwand für DB Server. Welchen TechStack würdest du mir empfehlen?
